@@ -1,0 +1,66 @@
+# Check if the current environment is WSL.
+if (($(cat /proc/version | grep -c "WSL") == 1 )); then
+    proxy_off(){
+        unset http_proxy
+        unset https_proxy
+        unset all_proxy
+        echo -e "Proxy Off"
+    }
+    proxy_on() {
+        export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+        export HOSTIP=$(cat /etc/resolv.conf | grep "nameserver" | cut -f 2 -d " ")
+        export http_proxy="http://$HOSTIP:7890"
+        export https_proxy="http://$HOSTIP:7890"
+        export all_proxy="socks5://$HOSTIP:7890"
+        echo -e "Proxy On"
+    }
+else
+    proxy_off(){
+        unset http_proxy
+        unset https_proxy
+        unset all_proxy
+        echo -e "Proxy Off"
+    }
+    proxy_on() {
+        export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+        export HOSTIP=$(cat /etc/resolv.conf | grep "nameserver" | cut -f 2 -d " ")
+        export http_proxy="http://127.0.0.1:7890"
+        export https_proxy="http://127.0.0.1:7890"
+        export all_proxy="socks5://127.0.0.1:7890"
+        echo -e "Proxy On"
+    }
+fi
+
+function mkcd() {
+  if [ ! -n "$1" ]; then
+    echo "Enter a directory name"
+  elif [ -d $1 ]; then
+    echo "\`$1' already exists"
+  else
+    mkdir -pv $1 && cd $1
+  fi
+}
+
+# exa alias
+alias ls='exa --group-directories-first --git --icons --header'
+alias ll='ls -l'
+alias la='ls -la'
+alias lst2='ls -T --level=2'
+alias lst3='ls -T --level=3'
+alias llt2='ll -T --level=2'
+alias llt3='ll -T --level=3'
+alias lat2='la -T --level=2'
+alias lat3='la -T --level=3'
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# docker
+alias dkd='docker compose down'
+alias dku='docker compose up'
+alias dkud='docker compose up -d'
+function dkspp() {
+  id=$(docker ps -a | grep $1 | awk '{print $1}')
+  docker stop $id
+  docker container prune
+}
