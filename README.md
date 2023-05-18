@@ -40,6 +40,7 @@ git add .gitignore --force
 git add .p10k.zsh --force
 git add .tmux.conf --force
 git add .vimrc --force
+git add .aliases --force
 
 git commit -m "230503-TencetCloud"
 git branch -M main
