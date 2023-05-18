@@ -32,7 +32,7 @@ git init
 
 git add .zshrc --force
 git add .vim/ --force
-git submodule add -f https://gitee.com/romkatv/powerlevel10k.git .zsh/powerlevel10k
+git submodule add -f https://github.com/romkatv/powerlevel10k.git .zsh/powerlevel10k
 git submodule add -f https://github.com/zsh-users/zsh-autosuggestions .zsh/zsh-autosuggestions
 git submodule add -f https://github.com/marlonrichert/zsh-autocomplete.git .zsh/zsh-autocomplete
 git submodule add -f https://github.com/zsh-users/zsh-syntax-highlighting.git .zsh/zsh-syntax-highlighting
