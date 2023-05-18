@@ -56,6 +56,7 @@ On new machine.
 ```
 apt update
 apt install zsh -y
+apt install git -y
 chsh -s /bin/zsh
 ```
 
