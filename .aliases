@@ -59,6 +59,7 @@ eval "$(zoxide init zsh)"
 alias dkd='docker compose down'
 alias dku='docker compose up'
 alias dkud='docker compose up -d'
+alias caddy_reload='z caddy;docker compose exec -w /etc/caddy caddy caddy reload'
 function dkspp() {
   id=$(docker ps -a | grep $1 | awk '{print $1}')
   docker stop $id
