@@ -1,4 +1,4 @@
-# LinuxHome
+# LinuxHome(deprecated)
 
 Backup $HOME files of Linux machines
 
